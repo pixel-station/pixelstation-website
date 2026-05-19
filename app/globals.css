@@ -3,13 +3,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --font-heading: var(--font-merriweather);
+  --font-body: var(--font-assistant);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-body);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +22,73 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+nav,
+nav a,
+summary {
+  font-family: var(--font-assistant) !important;
+}
+
+.font-assistant,
+.font-assistant * {
+  font-family: var(--font-assistant) !important;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: revealFade 2400ms ease forwards;
+}
+
+.reveal-delay-1 {
+  animation-delay: 120ms;
+}
+
+.reveal-delay-2 {
+  animation-delay: 240ms;
+}
+
+@keyframes revealFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 0;
+  background: #2563eb;
+  transition: width 300ms ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
