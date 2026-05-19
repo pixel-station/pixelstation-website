@@ -68,7 +68,7 @@ export default function HeroPixelIntro() {
           delay: 2.0,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="relative z-20 max-w-5xl text-[46px] font-normal leading-[0.92] tracking-[-0.045em] md:tracking-[-0.05em] text-white md:text-[76px]"
+        className="relative z-20 max-w-5xl text-[46px] font-normal leading-[0.88] md:leading-[0.92] tracking-[-0.045em] md:tracking-[-0.05em] text-white md:text-[76px]"
       >
         Modern Websites. Real Results.
       </motion.h1>

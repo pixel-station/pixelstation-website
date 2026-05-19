@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white font-[var(--font-assistant)] text-slate-950">
       <header className="fixed top-0 z-50 w-full border-b border-slate-200/70 bg-white/95 backdrop-blur-xl">
-        <div className="grid h-28 w-full grid-cols-[1fr_auto_1fr] items-center px-8">
+        <div className="grid h-32 w-full grid-cols-[1fr_auto_1fr] items-center px-8">
           <div className="flex items-center">
             <details className="group relative md:hidden">
               <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-slate-700 transition hover:text-blue-600 [&::-webkit-details-marker]:hidden">
@@ -90,7 +90,7 @@ export default function Home() {
                   delay: 3.15,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mt-10 max-w-3xl text-[16px] font-normal leading-[1.85] tracking-[0.005em] text-white/88 md:text-[17px]"
+                className="mt-10 max-w-2xl text-[16px] font-normal leading-[1.85] tracking-[0.005em] text-white/88 md:text-[17px]"
               >
                 Pixel Station designs and builds modern websites for businesses,
                 events and brands. We specialise in website design, eCommerce,
@@ -102,13 +102,17 @@ export default function Home() {
           </div>
         </section>
 
-      <section
-        id="about"
-        className="bg-cover bg-center px-6 py-6 text-center md:px-8 md:py-15"
-        style={{
-          backgroundImage: "url('/images/backgrounds/background-12.png')",
-        }}
-      >
+       <motion.section
+          id="about"
+          initial={{ opacity: 0, y: 45 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-cover bg-center px-6 py-6 text-center md:px-8 md:py-15"
+          style={{
+            backgroundImage: "url('/images/backgrounds/background-12.png')",
+          }}
+        >
         <div className="mx-auto max-w-4xl">
           <p className="font-[var(--font-playfair)] text-3xl italic leading-snug md:text-4xl">
             We build websites that help your business grow.
@@ -119,16 +123,20 @@ export default function Home() {
             increase conversions, and make your operations simpler.
           </p>
         </div>
-      </section>
+      </motion.section>
 
-      <section
-        id="services"
-        className="relative overflow-hidden bg-cover bg-center px-6 py-24 text-white md:px-8 md:py-28"
+        <motion.section
+          id="services"
+          initial={{ opacity: 0, y: 42 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 1.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative overflow-hidden bg-cover bg-center px-6 py-24 text-white md:px-8 md:py-28"
         style={{
           backgroundImage:
               "linear-gradient(90deg, rgba(0,0,0,0.86) 0%, rgba(0,0,0,0.70) 35%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.28) 100%), url('/images/backgrounds/background-16.png')",
         }}
-      >
+       >
         <div className="w-full">
           <div className="reveal max-w-3xl">
             <h2 className="max-w-5xl text-[46px] font-normal leading-[0.92] tracking-[-0.05em] md:text-[76px]">
@@ -147,9 +155,13 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section
+      <motion.section
+          initial={{ opacity: 0, y: 42 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
           className="grid gap-8 bg-cover bg-center px-6 py-16 md:grid-cols-3 md:gap-12 md:px-20 md:py-20"
           style={{
             backgroundImage: "url('/images/backgrounds/background-12.png')",
@@ -177,10 +189,14 @@ export default function Home() {
               </p>
             </div>
           ))}
-        </section>
+        </motion.section>
 
-      <section
+      <motion.section
         id="portfolio"
+        initial={{ opacity: 0, y: 42 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
         className="relative overflow-hidden bg-cover bg-center px-6 py-20 text-white md:px-8 md:py-24"
         style={{
           backgroundImage:
@@ -206,10 +222,14 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section
+      <motion.section
         id="contact"
+        initial={{ opacity: 0, y: 42 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
         className="bg-cover bg-center px-6 py-16 text-center md:px-8 md:py-20"
         style={{
           backgroundImage: "url('/images/backgrounds/background-12.png')",
@@ -225,7 +245,7 @@ export default function Home() {
         >
           Start Your Project →
         </a>
-      </section>
+      </motion.section>
 
       <footer className="border-t border-slate-200 bg-white px-6 py-8 font-[var(--font-assistant)] md:px-8">
       <div className="grid w-full grid-cols-1 items-start gap-6 md:grid-cols-[1fr_auto_1fr]">
