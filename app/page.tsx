@@ -55,7 +55,7 @@ export default function Home() {
 
           <div className="flex justify-center">
             <img
-              src="/images/logo/Logo.png"
+              src="/images/logo/logo.png"
               alt="Pixel Station"
               className="h-auto w-[250px] object-contain md:w-[260px] xl:w-[320px]"
             />
@@ -260,7 +260,7 @@ export default function Home() {
 
         <div className="flex items-center justify-center">
           <img
-            src="/images/logo/Logo.png"
+            src="/images/logo/logo.png"
             alt="Pixel Station"
             className="block h-auto max-w-none w-[320px] object-contain"
           />
