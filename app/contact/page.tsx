@@ -273,13 +273,39 @@ const handleSubmit = async (e: React.FormEvent) => {
       </div>
     </footer>
 
-    {statusMessage && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/50 px-6 backdrop-blur-sm">
-            <div className="max-w-md rounded-[32px] border border-white/40 bg-white p-8 text-center shadow-[0_24px_90px_rgba(15,23,42,0.25)]">
-            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
-                    <div className="grid grid-cols-5 gap-[2px]">
-                        
-                        {/* Row 1 */}
+{statusMessage && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/50 px-6 backdrop-blur-sm">
+    <div className="max-w-md rounded-[32px] border border-white/40 bg-white p-8 text-center shadow-[0_24px_90px_rgba(15,23,42,0.25)]">
+      <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
+        {statusType === "success" ? (
+          <div className="grid grid-cols-5 gap-[2px]">
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-[#2563ff]" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-[#2563ff]" />
+            <div className="h-2 w-2 bg-transparent" />
+
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-transparent" />
+
+            <div className="h-2 w-2 bg-[#2563ff]" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-[#2563ff]" />
+
+            <div className="h-2 w-2 bg-transparent" />
+            <div className="h-2 w-2 bg-[#2563ff]" />
+            <div className="h-2 w-2 bg-[#2563ff]" />
+            <div className="h-2 w-2 bg-[#2563ff]" />
+            <div className="h-2 w-2 bg-transparent" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-5 gap-[2px]">
+                            {/* Row 1 */}
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
@@ -307,69 +333,31 @@ const handleSubmit = async (e: React.FormEvent) => {
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
-
-                    </div>
-                    </div>
-
-            <h3 className="text-[28px] font-medium tracking-[-0.03em] text-slate-950">
-                {statusType === "success" ? (
-                        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[#2563ff]">
-                            <span className="text-[34px] font-semibold leading-none">✓</span>
-                        </div>
-                        ) : (
-                        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
-                            <div className="grid grid-cols-5 gap-[2px]">
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            <div className="h-2 w-2 bg-transparent" />
-
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            <div className="h-2 w-2 bg-transparent" />
-
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-transparent" />
-                            <div className="h-2 w-2 bg-[#2563ff]" />
-                            </div>
-                        </div>
-                        )}
-            </h3>
-
-            <p className="mt-3 text-[17px] leading-7 text-slate-600">
-                {statusMessage}
-            </p>
-
-            <button
-                type="button"
-                onClick={() => {
-                setStatusMessage("");
-                setStatusType("");
-                }}
-                className="mt-8 rounded-full bg-[#2563ff] px-8 py-3 text-[15px] font-medium text-white transition hover:scale-105 hover:bg-[#1f4ed8]"
-            >
-                Close
-            </button>
-            </div>
-        </div>
+          </div>
         )}
+      </div>
+
+      <h3 className="text-[28px] font-medium tracking-[-0.03em] text-slate-950">
+        {statusType === "success" ? "Message received" : "Oops!"}
+      </h3>
+
+      <p className="mt-3 text-[17px] leading-7 text-slate-600">
+        {statusMessage}
+      </p>
+
+      <button
+        type="button"
+        onClick={() => {
+          setStatusMessage("");
+          setStatusType("");
+        }}
+        className="mt-8 rounded-full bg-[#2563ff] px-8 py-3 text-[15px] font-medium text-white transition hover:scale-105 hover:bg-[#1f4ed8]"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
 
     </main>
   );
