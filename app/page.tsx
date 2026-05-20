@@ -35,21 +35,21 @@ export default function Home() {
 
               <div className="absolute left-0 top-10 overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 shadow-xl shadow-slate-900/10 backdrop-blur-xl">
                 <nav className="flex flex-col p-2 font-[var(--font-assistant)] text-[16px] font-normal tracking-[-0.01em] text-slate-700">
-                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="#">Home</a>
-                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="#about">About Us</a>
-                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="#services">Services</a>
-                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="#portfolio">Portfolio</a>
-                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="#contact">Contact Us</a>
+                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="/">Home</a>
+                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="/about-us">About Us</a>
+                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="/services">Services</a>
+                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="/portfolio">Portfolio</a>
+                  <a className="whitespace-nowrap rounded-xl px-5 py-3 font-normal transition duration-200 hover:bg-blue-50 hover:text-blue-600" href="/contact">Contact Us</a>
                 </nav>
               </div>
             </details>
 
             <nav className="hidden items-center gap-10 font-[var(--font-assistant)] text-[17px] font-normal tracking-[-0.01em] text-slate-700 md:flex">
-              <a href="#" className="nav-link whitespace-nowrap transition hover:text-blue-600">Home</a>
-              <a href="#about" className="nav-link whitespace-nowrap transition hover:text-blue-600">About Us</a>
-              <a href="#services" className="nav-link whitespace-nowrap transition hover:text-blue-600">Services</a>
-              <a href="#portfolio" className="nav-link whitespace-nowrap transition hover:text-blue-600">Portfolio</a>
-              <a href="#contact" className="nav-link whitespace-nowrap transition hover:text-blue-600">Contact Us</a>
+              <a href="/" className="nav-link whitespace-nowrap transition hover:text-blue-600">Home</a>
+              <a href="/about-us" className="nav-link whitespace-nowrap transition hover:text-blue-600">About Us</a>
+              <a href="/services" className="nav-link whitespace-nowrap transition hover:text-blue-600">Services</a>
+              <a href="/portfolio" className="nav-link whitespace-nowrap transition hover:text-blue-600">Portfolio</a>
+              <a href="/contact" className="nav-link whitespace-nowrap transition hover:text-blue-600">Contact Us</a>
             </nav>
           </div>
 
@@ -247,7 +247,7 @@ export default function Home() {
         </a>
       </motion.section>
 
-      <footer className="border-t border-slate-200 bg-white px-6 py-8 font-[var(--font-assistant)] md:px-8">
+      <footer className="border-t border-slate-200 bg-white px-6 py-8 font-[var(--font-assistant)] md:px-8 pt-20">
       <div className="grid w-full grid-cols-1 items-start gap-6 md:grid-cols-[1fr_auto_1fr]">
         
         <div>
@@ -260,19 +260,19 @@ export default function Home() {
               Home
             </a>
 
-            <a href="#about" className="transition hover:text-blue-600">
+            <a href="/about-us" className="transition hover:text-blue-600">
               About Us
             </a>
 
-            <a href="#services" className="transition hover:text-blue-600">
+            <a href="/services" className="transition hover:text-blue-600">
               Services
             </a>
 
-            <a href="#portfolio" className="transition hover:text-blue-600">
+            <a href="/portfolio" className="transition hover:text-blue-600">
               Portfolio
             </a>
 
-            <a href="#contact" className="transition hover:text-blue-600">
+            <a href="/contact" className="transition hover:text-blue-600">
               Contact Us
             </a>
           </div>
