@@ -1,15 +1,10 @@
 import { Resend } from "resend";
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function POST(req: Request) {
   try {
-    console.log("CONTACT API HIT");
-
     const { name, email, phone, comment } = await req.json();
-
-    console.log("FORM DATA:", { name, email, phone, comment });
-    console.log("HAS API KEY:", !!process.env.RESEND_API_KEY);
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const result = await resend.emails.send({
       from: "Pixel Station <noreply@pixelstation.com.au>",
@@ -26,14 +21,12 @@ export async function POST(req: Request) {
       `,
     });
 
-    console.log("RESEND RESULT:", result);
-
     return Response.json({ success: true, result });
   } catch (error) {
     console.error("EMAIL ERROR:", error);
 
     return Response.json(
-      { success: false, error: String(error) },
+      { success: false, error: "Email failed" },
       { status: 500 }
     );
   }

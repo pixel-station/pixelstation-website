@@ -40,19 +40,19 @@ const handleSubmit = async (e: React.FormEvent) => {
     });
 
     if (response.ok) {
-      setStatusType("success");
-        setStatusMessage("Message received successfully. We’ll get back to you shortly.");
+            setStatusType("success");
+            setStatusMessage("Message received successfully. We’ll get back to you shortly.");
 
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        comment: "",
-      });
-    } else {
-      setStatusType("error");
-        setStatusMessage("Something went wrong. Please try again in a moment.");
-    }
+            setFormData({
+                name: "",
+                email: "",
+                phone: "",
+                comment: "",
+            });
+            } else {
+            setStatusType("error");
+            setStatusMessage("Something went wrong. Please try again in a moment.");
+            }
   } catch (error) {
     console.error(error);
     setStatusType("error");
