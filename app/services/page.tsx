@@ -135,7 +135,7 @@ export default function ServicesPage() {
             </motion.p>
 
             <motion.a
-            href="mailto:create@pixelstation.com.au"
+            href="/contact"
             initial={{ opacity: 0, filter: "blur(6px)", scale: 0.98 }}
             animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
             transition={{
@@ -280,7 +280,7 @@ export default function ServicesPage() {
         </h2>
 
         <a
-          href="mailto:create@pixelstation.com.au"
+          href="/contact"
           className="mt-12 inline-flex items-center rounded-full bg-blue-600 px-8 py-4 text-[16px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
         >
           Start Your Project →

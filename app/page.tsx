@@ -148,7 +148,7 @@ export default function Home() {
             </p>
 
             <a
-              href="#contact"
+              href="/services"
               className="font-[var(--font-assistant)] mt-12 inline-flex items-center rounded-full bg-blue-600 px-7 py-3.5 text-[14px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
             >
               Explore Our Services →
@@ -215,7 +215,7 @@ export default function Home() {
             </p>
 
             <a
-              href="#contact"
+              href="/portfolio"
               className="font-[var(--font-assistant)] mt-12 inline-flex items-center rounded-full bg-blue-600 px-7 py-3.5 text-[14px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
             >
               View All Projects →
@@ -240,7 +240,7 @@ export default function Home() {
         </h2>
 
         <a
-          href="mailto:create@pixelstation.com.au"
+          href="/contact"
           className="font-[var(--font-assistant)] mt-12 inline-flex items-center rounded-full bg-blue-600 px-7 py-3.5 text-[14px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
         >
           Start Your Project →
