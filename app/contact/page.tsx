@@ -278,35 +278,42 @@ const handleSubmit = async (e: React.FormEvent) => {
             <div className="max-w-md rounded-[32px] border border-white/40 bg-white p-8 text-center shadow-[0_24px_90px_rgba(15,23,42,0.25)]">
             <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
                     <div className="grid grid-cols-5 gap-[2px]">
+                        
+                        {/* Row 1 */}
+                        <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
 
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        {/* Row 2 */}
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
 
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-transparent"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-
+                        {/* Row 3 */}
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
 
+                        {/* Row 4 */}
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
+
+                        {/* Row 5 */}
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+
                     </div>
                     </div>
 
