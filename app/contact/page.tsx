@@ -312,7 +312,45 @@ const handleSubmit = async (e: React.FormEvent) => {
                     </div>
 
             <h3 className="text-[28px] font-medium tracking-[-0.03em] text-slate-950">
-                {statusType === "success" ? "Message received" : "Oops!"}
+                {statusType === "success" ? (
+                        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[#2563ff]">
+                            <span className="text-[34px] font-semibold leading-none">✓</span>
+                        </div>
+                        ) : (
+                        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
+                            <div className="grid grid-cols-5 gap-[2px]">
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            <div className="h-2 w-2 bg-transparent" />
+
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            <div className="h-2 w-2 bg-transparent" />
+
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-transparent" />
+                            <div className="h-2 w-2 bg-[#2563ff]" />
+                            </div>
+                        </div>
+                        )}
             </h3>
 
             <p className="mt-3 text-[17px] leading-7 text-slate-600">
