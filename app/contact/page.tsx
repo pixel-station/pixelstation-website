@@ -2,12 +2,59 @@
 
 import { motion } from "framer-motion";
 import ContactPixelIntro from "../components/ContactPixelIntro";
-
-
+import { useState } from "react";
 
 
 
 export default function ContactUsPage() {
+
+    const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  comment: "",
+});
+
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      alert("Message sent successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        comment: "",
+      });
+    } else {
+      alert("Something went wrong.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Failed to send message.");
+  }
+};
+
+
   return (
     <main className="min-h-screen bg-white font-[var(--font-assistant)] text-slate-950">
       
@@ -93,50 +140,59 @@ export default function ContactUsPage() {
         }}
       >
         <form
-          action="mailto:create@pixelstation.com.au"
-          method="post"
-          encType="text/plain"
-          className="mx-auto max-w-3xl rounded-[32px] bg-white/92 p-8 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm md:p-12"
-        >
-          <div className="grid gap-5 md:grid-cols-2">
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              className="h-14 rounded-2xl border border-slate-200 bg-white px-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="h-14 rounded-2xl border border-slate-200 bg-white px-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
-            />
-          </div>
-
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone"
-            className="mt-5 h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
-          />
-
-          <textarea
-            name="message"
-            placeholder="Comment"
-            rows={8}
-            className="mt-5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-5 py-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
-          />
-
-          <div className="text-center">
-            <button
-              type="submit"
-              className="mt-10 inline-flex items-center justify-center rounded-full bg-[#2563ff] px-10 py-4 text-[16px] font-medium text-white transition duration-300 hover:scale-105 hover:bg-[#1f4ed8]"
+            onSubmit={handleSubmit}
+            className="mx-auto max-w-3xl rounded-[32px] bg-white/92 p-8 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm md:p-12"
             >
-              Submit →
-            </button>
-          </div>
-        </form>
+            <div className="grid gap-5 md:grid-cols-2">
+                <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="h-14 rounded-2xl border border-slate-200 bg-white px-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                />
+
+                <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="h-14 rounded-2xl border border-slate-200 bg-white px-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                />
+            </div>
+
+            <input
+                type="tel"
+                name="phone"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="mt-5 h-14 w-full rounded-2xl border border-slate-200 bg-white px-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+            />
+
+            <textarea
+                name="comment"
+                placeholder="Comment"
+                rows={8}
+                value={formData.comment}
+                onChange={handleChange}
+                required
+                className="mt-5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-5 py-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+            />
+
+            <div className="text-center">
+                <button
+                type="submit"
+                className="mt-10 inline-flex items-center justify-center rounded-full bg-[#2563ff] px-10 py-4 text-[16px] font-medium text-white transition duration-300 hover:scale-105 hover:bg-[#1f4ed8]"
+                >
+                Submit →
+                </button>
+            </div>
+            </form>
       </motion.section>
 
 
