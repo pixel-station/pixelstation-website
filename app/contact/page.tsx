@@ -15,6 +15,9 @@ export default function ContactUsPage() {
   comment: "",
 });
 
+const [statusMessage, setStatusMessage] = useState("");
+const [statusType, setStatusType] = useState<"success" | "error" | "">("");
+
 const handleChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 ) => {
@@ -37,7 +40,8 @@ const handleSubmit = async (e: React.FormEvent) => {
     });
 
     if (response.ok) {
-      alert("Message sent successfully!");
+      setStatusType("success");
+        setStatusMessage("Message received successfully. We’ll get back to you shortly.");
 
       setFormData({
         name: "",
@@ -46,11 +50,13 @@ const handleSubmit = async (e: React.FormEvent) => {
         comment: "",
       });
     } else {
-      alert("Something went wrong.");
+      setStatusType("error");
+        setStatusMessage("Oops. Something went wrong. Please try again in a moment.");
     }
   } catch (error) {
     console.error(error);
-    alert("Failed to send message.");
+    setStatusType("error");
+    setStatusMessage("Oops. Something went wrong. Please try again in a moment.");
   }
 };
 
@@ -266,6 +272,39 @@ const handleSubmit = async (e: React.FormEvent) => {
         <p>Terms and Policies</p>
       </div>
     </footer>
+
+    {statusMessage && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/50 px-6 backdrop-blur-sm">
+            <div className="max-w-md rounded-[32px] border border-white/40 bg-white p-8 text-center shadow-[0_24px_90px_rgba(15,23,42,0.25)]">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
+                <img
+                src="/images/logo/logo.png"
+                alt="Pixel Station"
+                className="h-10 w-10 object-contain"
+                />
+            </div>
+
+            <h3 className="text-[28px] font-medium tracking-[-0.03em] text-slate-950">
+                {statusType === "success" ? "Message received" : "Oops"}
+            </h3>
+
+            <p className="mt-3 text-[17px] leading-7 text-slate-600">
+                {statusMessage}
+            </p>
+
+            <button
+                type="button"
+                onClick={() => {
+                setStatusMessage("");
+                setStatusType("");
+                }}
+                className="mt-8 rounded-full bg-[#2563ff] px-8 py-3 text-[15px] font-medium text-white transition hover:scale-105 hover:bg-[#1f4ed8]"
+            >
+                Close
+            </button>
+            </div>
+        </div>
+        )}
 
     </main>
   );
