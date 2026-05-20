@@ -51,12 +51,12 @@ const handleSubmit = async (e: React.FormEvent) => {
       });
     } else {
       setStatusType("error");
-        setStatusMessage("Oops. Something went wrong. Please try again in a moment.");
+        setStatusMessage("Something went wrong. Please try again in a moment.");
     }
   } catch (error) {
     console.error(error);
     setStatusType("error");
-    setStatusMessage("Oops. Something went wrong. Please try again in a moment.");
+    setStatusMessage("Something went wrong. Please try again in a moment.");
   }
 };
 
@@ -277,15 +277,41 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/50 px-6 backdrop-blur-sm">
             <div className="max-w-md rounded-[32px] border border-white/40 bg-white p-8 text-center shadow-[0_24px_90px_rgba(15,23,42,0.25)]">
             <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50">
-                <img
-                src="/images/logo/logo.png"
-                alt="Pixel Station"
-                className="h-10 w-10 object-contain"
-                />
-            </div>
+                    <div className="grid grid-cols-5 gap-[2px]">
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                    </div>
+                    </div>
 
             <h3 className="text-[28px] font-medium tracking-[-0.03em] text-slate-950">
-                {statusType === "success" ? "Message received" : "Oops"}
+                {statusType === "success" ? "Message received" : "Oops!"}
             </h3>
 
             <p className="mt-3 text-[17px] leading-7 text-slate-600">
