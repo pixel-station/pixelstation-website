@@ -1,10 +1,19 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   try {
     const { name, email, phone, comment } = await req.json();
+
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      return Response.json(
+        { success: false, error: "Missing Resend API key" },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
 
     const result = await resend.emails.send({
       from: "Pixel Station <noreply@pixelstation.com.au>",
@@ -20,6 +29,13 @@ export async function POST(req: Request) {
         <p>${comment}</p>
       `,
     });
+
+    if (result.error) {
+      return Response.json(
+        { success: false, error: result.error },
+        { status: 500 }
+      );
+    }
 
     return Response.json({ success: true, result });
   } catch (error) {
