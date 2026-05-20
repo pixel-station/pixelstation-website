@@ -43,13 +43,27 @@ export default function ServicesPixelIntro() {
               },
             }}
             transition={{
-              duration: 6,
+              duration: 3.5,
               delay: (index % 28) * 0.02,
               ease: "linear",
             }}
           />
         ))}
       </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scaleX: 0.2 }}
+        animate={{
+            opacity: [0, 1, 0],
+            scaleX: [0.2, 1.15, 1.35],
+        }}
+        transition={{
+            duration: 3.5,
+            delay: 2.2,
+            ease: [0.22, 1, 0.36, 1],
+        }}
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[220px] w-[140%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/55 blur-[90px]"
+        />
 
       <motion.h1
         initial={{
@@ -64,11 +78,10 @@ export default function ServicesPixelIntro() {
         }}
         transition={{
           duration: 1.5,
-          delay: 2.15,
+          delay: 2,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="relative z-20 text-[48px] font-normal leading-[0.95] tracking-[-0.05em] text-white md:text-[82px]"
-      >
+        className="relative z-20 max-w-5xl text-[46px] font-normal leading-[0.88] md:leading-[0.92] tracking-[-0.045em] md:tracking-[-0.05em] text-white drop-shadow-[0_0_38px_rgba(255,255,255,1)] md:text-[76px]"      >
         Services That Help Your Business Grow
       </motion.h1>
     </div>
