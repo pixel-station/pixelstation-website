@@ -294,25 +294,25 @@ const handleSubmit = async (e: React.FormEvent) => {
                         <div className="h-2 w-2 bg-transparent"></div>
 
                         {/* Row 3 */}
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-transparent"></div>
-                        <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
 
                         {/* Row 4 */}
                         <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
-                        <div className="h-2 w-2 bg-[#2563ff]"></div>
+                        <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
 
                         {/* Row 5 */}
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
                         <div className="h-2 w-2 bg-transparent"></div>
-                        <div className="h-2 w-2 bg-transparent"></div>
-                        <div className="h-2 w-2 bg-transparent"></div>
+                        <div className="h-2 w-2 bg-[#2563ff]"></div>
 
                     </div>
                     </div>
