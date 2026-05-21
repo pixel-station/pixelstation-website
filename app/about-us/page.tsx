@@ -71,7 +71,7 @@ export default function AboutUsPage() {
 
 
       <section
-        className="relative flex min-h-[750px] items-center bg-cover bg-center px-6 pt-32 text-white md:px-8"
+        className="relative flex min-h-[320px] items-center bg-cover bg-center px-6 pt-28 text-white md:min-h-[750px] md:px-8 md:pt-32"
         style={{
           backgroundImage:
                 "linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.46) 45%, rgba(0,0,0,0.16) 100%), url('/images/backgrounds/background-15.png')",
@@ -132,7 +132,7 @@ export default function AboutUsPage() {
             >
         <div className="overflow-hidden">
         <div
-            className="min-h-[760px] bg-cover bg-center transition duration-700 hover:scale-[1.02]"
+            className="h-[380px] w-full object-cover md:h-[700px] bg-cover bg-center transition duration-700 hover:scale-[1.02]"
             style={{
             backgroundImage: "url('/images/backgrounds/background-01.png')",
             backgroundPosition: "center",
@@ -234,7 +234,7 @@ export default function AboutUsPage() {
 
         <div className="overflow-hidden">
         <div
-            className="min-h-[760px] bg-cover bg-center transition duration-700 hover:scale-[1.02]"
+            className="h-[380px] w-full object-cover md:h-[750px] bg-cover bg-center transition duration-700 hover:scale-[1.02]"
             style={{
             backgroundImage: "url('/images/backgrounds/background-19.png')",
             backgroundPosition: "center",

@@ -105,8 +105,7 @@ export default function ServicesPage() {
     
     
       <section
-        className="relative flex min-h-[720px] items-center justify-center bg-cover bg-[center_top] px-6 pt-24 pb-0 text-center text-white md:min-h-[760px] md:bg-center md:px-8 md:pt-52 md:pb-32"
-        style={{
+            className="relative flex min-h-[560px] items-center justify-center bg-cover bg-[center_top] px-6 pt-40 pb-10 text-center text-white md:min-h-[760px] md:bg-center md:px-8 md:pt-52 md:pb-32"        style={{
           backgroundImage:
             "linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.48) 50%, rgba(0,0,0,0.18) 100%), url('/images/backgrounds/background-22.png')",
         }}
@@ -126,7 +125,7 @@ export default function ServicesPage() {
                 duration: 1.2,
                 ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto max-w-6xl"
+            className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center text-center"
             >
             <h1 className="text-[48px] font-normal leading-[0.9] tracking-[-0.05em] text-white md:text-[82px]">
                 Services That Help Your Business Grow
@@ -140,7 +139,7 @@ export default function ServicesPage() {
                 delay: 0.3,
                 ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mx-auto mt-8 max-w-3xl text-[17px] leading-8 text-white/90"
+                className="mx-auto mt-8 max-w-[320px] text-center text-[17px] leading-8 text-white/90 md:max-w-3xl"
             >
                 From websites to business setup, we build digital solutions that
                 help you attract customers, convert leads, and run your business
@@ -162,7 +161,7 @@ export default function ServicesPage() {
                 delay: 0.55,
                 ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mt-10 inline-flex items-center rounded-full bg-blue-600 px-8 py-4 text-[15px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
+                className="mt-10 inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-[15px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
             >
                 Start Your Project →
             </motion.a>
@@ -260,7 +259,7 @@ export default function ServicesPage() {
       >
         <div className="overflow-hidden">
           <div
-            className="min-h-[680px] bg-cover bg-center transition duration-700 hover:scale-[1.02]"
+            className="h-[380px] w-full object-cover md:h-[680px] bg-cover bg-center transition duration-700 hover:scale-[1.02]"
             style={{
               backgroundImage: "url('/images/backgrounds/background-03.png')",
             }}

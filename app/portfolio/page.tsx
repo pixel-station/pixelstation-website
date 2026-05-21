@@ -119,55 +119,34 @@ export default function PortfolioPage() {
       </header>
       
       
-        <section
-        className="relative flex min-h-[500px] items-center bg-cover bg-center px-6 pt-12 pb-12 text-white md:min-h-[560px] md:px-8 md:pt-45 md:pb-16"
-        style={{
-            backgroundImage:
-            "linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.48) 52%, rgba(0,0,0,0.16) 100%), url('/images/backgrounds/background-23.png')",
-        }}
-        >
-        <motion.div
-            initial={{
-                opacity: 0,
-                y: 24,
-                filter: "blur(10px)",
-            }}
-            animate={{
-                opacity: 1,
-                y: 0,
-                filter: "blur(0px)",
-            }}
-            transition={{
-                duration: 1.2,
-                ease: [0.22, 1, 0.36, 1],
-            }}
-            className="relative flex min-h-[500px] w-full flex-col items-center justify-center px-3 text-center md:min-h-[360px] md:px-8"
-            >
-            <h1 className="max-w-5xl text-[52px] font-normal leading-[0.92] tracking-[-0.05em] text-white md:text-[86px]">
-                Selected Projects & Digital Work
-            </h1>
+<section
+  className="relative h-[430px] overflow-hidden bg-cover bg-center px-6 text-white md:h-[560px] md:px-8"
+  style={{
+    backgroundImage:
+      "linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.48) 52%, rgba(0,0,0,0.16) 100%), url('/images/backgrounds/background-23.png')",
+  }}
+>
+  <motion.div
+    initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
+    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+    className="absolute left-1/2 top-[65%] flex w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 flex-col items-center px-6 text-center md:top-[60%]"
+  >
+    <h1 className="mx-auto max-w-[360px] text-center text-[38px] font-normal leading-[0.92] tracking-[-0.05em] text-white md:max-w-5xl md:text-[86px]">
+      Selected Projects & Digital Work
+    </h1>
 
-            <motion.p
-                initial={{
-                opacity: 0,
-                y: 10,
-                }}
-                animate={{
-                opacity: 1,
-                y: 0,
-                }}
-                transition={{
-                duration: 1,
-                delay: 0.35,
-                ease: [0.22, 1, 0.36, 1],
-                }}
-                className="mt-8 max-w-2xl text-center text-[18px] leading-8 text-white/90"
-            >
-                Websites, branding, digital setup, and modern online experiences designed
-                for growing businesses.
-            </motion.p>
-            </motion.div>
-        </section>
+    <motion.p
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="mx-auto mt-7 max-w-[320px] text-center text-[17px] leading-8 text-white/90 md:max-w-3xl md:text-[18px]"
+    >
+      Websites, branding, digital setup, and modern online experiences designed
+      for growing businesses.
+    </motion.p>
+  </motion.div>
+</section>
 
       <motion.section
         initial={{ opacity: 0, y: 42 }}

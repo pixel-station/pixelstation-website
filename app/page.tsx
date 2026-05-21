@@ -248,14 +248,14 @@ export default function Home() {
       </motion.section>
 
       <footer className="border-t border-slate-200 bg-white px-6 py-8 font-[var(--font-assistant)] md:px-8 pt-20">
-      <div className="grid w-full grid-cols-1 items-start gap-6 md:grid-cols-[1fr_auto_1fr]">
+      <div className="flex w-full flex-col items-center gap-10 text-center md:grid md:grid-cols-[1fr_auto_1fr] md:items-start md:text-left">
         
-        <div>
+        <div className="order-2 flex flex-col items-center md:order-1 md:items-start">
           <h3 className="text-[18px] font-normal text-slate-950">
             Navigation
           </h3>
 
-          <div className="mt-3 flex flex-col gap-2 text-[15px] font-normal text-slate-600">
+          <div className="mt-3 flex flex-col items-center gap-2 text-[15px] font-normal text-slate-600 md:items-start">
             <a href="#" className="transition hover:text-blue-600">
               Home
             </a>
@@ -278,15 +278,15 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="order-1 flex items-center justify-center md:order-2">
           <img
             src="/images/logo/logo.png"
             alt="Pixel Station"
-            className="block h-auto max-w-none w-[320px] object-contain"
+            className="block h-auto w-[220px] object-contain md:w-[320px]"
           />
         </div>
 
-        <div className="md:text-right">
+        <div className="order-3 flex flex-col items-center md:items-end md:text-right">
           <h3 className="text-[18px] font-normal text-slate-950">
             Get in Touch
           </h3>
@@ -296,7 +296,7 @@ export default function Home() {
                 href="https://www.instagram.com/pixelstationau"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 transition hover:text-blue-600 md:justify-end"
+                className="flex items-center justify-center gap-2 transition hover:text-blue-600 md:justify-end"
               >
                 <img
                   src="/images/icons/instagram_icon.png"
@@ -310,7 +310,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-8 flex w-full justify-between border-t border-slate-200 pt-5 text-[13px] font-normal text-slate-500">
+      <div className="mt-8 flex w-full flex-col items-center justify-center gap-2 border-t border-slate-200 pt-5 text-center text-[13px] font-normal text-slate-500 md:flex-row md:justify-between">
         <p>© 2026 Pixel Station</p>
         <p>Terms and Policies</p>
       </div>
