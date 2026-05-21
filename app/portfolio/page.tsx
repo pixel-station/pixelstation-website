@@ -127,29 +127,46 @@ export default function PortfolioPage() {
         }}
         >
         <motion.div
-            initial={{ opacity: 0, y: 42 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex min-h-[500px] w-full px-3 md:min-h-[360px] md:px-8"
-        >
-            <div className="absolute left-1/2 top-1/2 w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 text-center">
-            <PortfolioPixelIntro />
-            </div>
+            initial={{
+                opacity: 0,
+                y: 24,
+                filter: "blur(10px)",
+            }}
+            animate={{
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+            }}
+            transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+            }}
+            className="relative flex min-h-[500px] w-full flex-col items-center justify-center px-3 text-center md:min-h-[360px] md:px-8"
+            >
+            <h1 className="max-w-5xl text-[52px] font-normal leading-[0.92] tracking-[-0.05em] text-white md:text-[86px]">
+                Selected Projects & Digital Work
+            </h1>
 
             <motion.p
-                initial={{ opacity: 0, filter: "blur(6px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{
-                    duration: 1.4,
-                    delay: 3.2,
-                    ease: [0.22, 1, 0.36, 1],
+                initial={{
+                opacity: 0,
+                y: 10,
                 }}
-                className="absolute bottom-4 right-3 max-w-md text-center text-[18px] leading-8 text-white/90 md:right-8 md:text-right"
-                >
-                Websites, branding, digital setup, and modern online experiences
-                designed for growing businesses.
-                </motion.p>
-        </motion.div>
+                animate={{
+                opacity: 1,
+                y: 0,
+                }}
+                transition={{
+                duration: 1,
+                delay: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mt-8 max-w-2xl text-center text-[18px] leading-8 text-white/90"
+            >
+                Websites, branding, digital setup, and modern online experiences designed
+                for growing businesses.
+            </motion.p>
+            </motion.div>
         </section>
 
       <motion.section

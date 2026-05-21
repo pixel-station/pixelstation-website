@@ -112,26 +112,44 @@ const handleSubmit = async (e: React.FormEvent) => {
             }}
             >
             <motion.div
-                initial={{ opacity: 0, filter: "blur(8px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute left-1/2 top-[65%] w-full -translate-x-1/2 -translate-y-1/2 px-8 text-center md:top-[62%]"
+            initial={{
+                opacity: 0,
+                y: 24,
+                filter: "blur(10px)",
+            }}
+            animate={{
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+            }}
+            transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute left-1/2 top-[67%] w-full -translate-x-1/2 -translate-y-1/2 px-8 text-center md:top-[60%]"
             >
-                <ContactPixelIntro />
+            <h1 className="text-[56px] font-normal leading-[0.92] tracking-[-0.05em] text-white md:text-[92px]">
+                Contact Us
+            </h1>
 
-                <motion.p
-                initial={{ opacity: 0, filter: "blur(6px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
+            <motion.p
+                initial={{
+                opacity: 0,
+                y: 10,
+                }}
+                animate={{
+                opacity: 1,
+                y: 0,
+                }}
                 transition={{
-                    duration: 1.4,
-                    delay: 3.2,
-                    ease: [0.22, 1, 0.36, 1],
+                duration: 1,
+                delay: 0.35,
+                ease: [0.22, 1, 0.36, 1],
                 }}
                 className="mx-auto mt-8 max-w-3xl text-[17px] leading-8 text-white/90"
-                >
+            >
                 Tell us about your project and we’ll get back to you shortly.
-                </motion.p>
-                
+            </motion.p>
             </motion.div>
             </section>
 

@@ -112,42 +112,61 @@ export default function ServicesPage() {
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 42 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-6xl"
-        >
-          <ServicesPixelIntro />
-
-         <motion.p
-            initial={{ opacity: 0, filter: "blur(6px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
+            initial={{
+                opacity: 0,
+                y: 24,
+                filter: "blur(10px)",
+            }}
+            animate={{
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+            }}
             transition={{
-                duration: 1.4,
-                delay: 3.2,
+                duration: 1.2,
                 ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto mt-8 max-w-3xl text-[17px] leading-8 text-white/90"
+            className="mx-auto max-w-6xl"
             >
-            From websites to business setup, we build digital solutions that
-            help you attract customers, convert leads, and run your business
-            with confidence.
+            <h1 className="text-[48px] font-normal leading-[0.9] tracking-[-0.05em] text-white md:text-[82px]">
+                Services That Help Your Business Grow
+            </h1>
+
+            <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                duration: 1,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mx-auto mt-8 max-w-3xl text-[17px] leading-8 text-white/90"
+            >
+                From websites to business setup, we build digital solutions that
+                help you attract customers, convert leads, and run your business
+                with confidence.
             </motion.p>
 
             <motion.a
-            href="/contact"
-            initial={{ opacity: 0, filter: "blur(6px)", scale: 0.98 }}
-            animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-            transition={{
-                duration: 1.2,
-                delay: 3.55,
+                href="/contact"
+                initial={{
+                opacity: 0,
+                y: 10,
+                }}
+                animate={{
+                opacity: 1,
+                y: 0,
+                }}
+                transition={{
+                duration: 1,
+                delay: 0.55,
                 ease: [0.22, 1, 0.36, 1],
-            }}
-            className="mt-10 inline-flex items-center rounded-full bg-blue-600 px-8 py-4 text-[15px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
+                }}
+                className="mt-10 inline-flex items-center rounded-full bg-blue-600 px-8 py-4 text-[15px] font-normal tracking-[0.01em] text-white transition duration-300 hover:bg-blue-500 hover:shadow-lg"
             >
-            Start Your Project →
+                Start Your Project →
             </motion.a>
-        </motion.div>
+            </motion.div>
       </section>
 
       <motion.section
