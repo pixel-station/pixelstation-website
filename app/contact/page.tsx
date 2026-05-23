@@ -4,7 +4,13 @@
 import { motion } from "framer-motion";
 import ContactPixelIntro from "../components/ContactPixelIntro";
 import { useState } from "react";
-import Turnstile from "react-turnstile";
+
+import dynamic from "next/dynamic";
+
+const Turnstile = dynamic(
+  () => import("react-turnstile"),
+  { ssr: false }
+);
 
 
 
@@ -232,13 +238,12 @@ const handleSubmit = async (e: React.FormEvent) => {
                 autoComplete="off"
               />
 
-              <div className="mt-6 flex justify-center border border-red-500 p-4">
-                  <p className="text-red-500">Turnstile area test</p>
-                  <Turnstile
-                    sitekey="0x4AAAAAADUoEf10wkNnGQuS"
-                    onVerify={(token) => setTurnstileToken(token)}
-                  />
-                </div>
+              <div className="mt-6 flex justify-center">
+                      <Turnstile
+                        sitekey="0x4AAAAAADUoEf10wkNnGQuS"
+                        onVerify={(token) => setTurnstileToken(token)}
+                      />
+                    </div>
 
             <div className="text-center">
                 <button
