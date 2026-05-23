@@ -9,6 +9,15 @@ import Script from "next/script";
 declare global {
   interface Window {
     onTurnstileSuccess: (token: string) => void;
+    turnstile: {
+      render: (
+        container: string,
+        options: {
+          sitekey: string;
+          callback: (token: string) => void;
+        }
+      ) => void;
+    };
   }
 }
 
@@ -32,6 +41,19 @@ useEffect(() => {
   window.onTurnstileSuccess = (token: string) => {
     setTurnstileToken(token);
   };
+
+  const interval = setInterval(() => {
+    if (window.turnstile) {
+      clearInterval(interval);
+
+      window.turnstile.render("#turnstile-container", {
+        sitekey: "0x4AAAAAADUoEf10wkNnGQuS",
+        callback: window.onTurnstileSuccess,
+      });
+    }
+  }, 500);
+
+  return () => clearInterval(interval);
 }, []);
 
 
@@ -244,10 +266,9 @@ const handleSubmit = async (e: React.FormEvent) => {
               />
 
               <div
-                      className="cf-turnstile mt-6 flex justify-center"
-                      data-sitekey="0x4AAAAAADUoEf10wkNnGQuS"
-                      data-callback="onTurnstileSuccess"
-                    />
+                  id="turnstile-container"
+                  className="mt-6 flex justify-center"
+                />
 
             <div className="text-center">
                 <button
@@ -419,8 +440,8 @@ const handleSubmit = async (e: React.FormEvent) => {
 )}
 
 <Script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  strategy="afterInteractive"
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+  strategy="beforeInteractive"
 />
 
     </main>
