@@ -3,15 +3,14 @@
 
 import { motion } from "framer-motion";
 import ContactPixelIntro from "../components/ContactPixelIntro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Script from "next/script";
 
-import dynamic from "next/dynamic";
-
-const Turnstile = dynamic(
-  () => import("react-turnstile"),
-  { ssr: false }
-);
-
+declare global {
+  interface Window {
+    onTurnstileSuccess: (token: string) => void;
+  }
+}
 
 
 export default function ContactUsPage() {
@@ -28,6 +27,12 @@ const [companyWebsite, setCompanyWebsite] = useState("");
 
 const [statusMessage, setStatusMessage] = useState("");
 const [statusType, setStatusType] = useState<"success" | "error" | "">("");
+
+useEffect(() => {
+  window.onTurnstileSuccess = (token: string) => {
+    setTurnstileToken(token);
+  };
+}, []);
 
 
 
@@ -238,12 +243,11 @@ const handleSubmit = async (e: React.FormEvent) => {
                 autoComplete="off"
               />
 
-              <div className="mt-6 flex justify-center">
-                      <Turnstile
-                        sitekey="0x4AAAAAADUoEf10wkNnGQuS"
-                        onVerify={(token) => setTurnstileToken(token)}
-                      />
-                    </div>
+              <div
+                      className="cf-turnstile mt-6 flex justify-center"
+                      data-sitekey="0x4AAAAAADUoEf10wkNnGQuS"
+                      data-callback="onTurnstileSuccess"
+                    />
 
             <div className="text-center">
                 <button
@@ -413,6 +417,11 @@ const handleSubmit = async (e: React.FormEvent) => {
     </div>
   </div>
 )}
+
+<Script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  strategy="afterInteractive"
+/>
 
     </main>
   );
