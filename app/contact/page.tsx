@@ -4,24 +4,6 @@
 import { motion } from "framer-motion";
 import ContactPixelIntro from "../components/ContactPixelIntro";
 import { useRef, useState } from "react";
-import Script from "next/script";
-
-declare global {
-  interface Window {
-    turnstile: {
-      render: (
-        container: string,
-        options: {
-          sitekey: string;
-          size: "invisible";
-          callback: (token: string) => void;
-        }
-      ) => string;
-      execute: (widgetId: string) => void;
-      reset: (widgetId: string) => void;
-    };
-  }
-}
 
 
 export default function ContactUsPage() {
@@ -33,7 +15,6 @@ export default function ContactUsPage() {
   comment: "",
 });
 
-const turnstileWidgetId = useRef<string | null>(null);
 const [turnstileToken, setTurnstileToken] = useState("");
 const [companyWebsite, setCompanyWebsite] = useState("");
 const [loading, setLoading] = useState(false);
@@ -59,58 +40,38 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   setStatusMessage("");
   setStatusType("");
 
-  if (!window.turnstile) {
-    setLoading(false);
-    setStatusMessage("Verification failed. Please refresh and try again.");
-    setStatusType("error");
-    return;
-  }
-
-  if (!turnstileWidgetId.current) {
-    turnstileWidgetId.current = window.turnstile.render("#turnstile-container", {
-      sitekey: "0x4AAAAAADUoEf10wkNnGQuS",
-      size: "invisible",
-      callback: async (token: string) => {
-        try {
-          const response = await fetch("/api/contact", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ...formData,
-              turnstileToken: token,
-              companyWebsite,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to send message");
-          }
-
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            comment: "",
-          });
-
-          setCompanyWebsite("");
-          setStatusMessage("Thanks! Your message has been sent.");
-          setStatusType("success");
-
-          window.turnstile.reset(turnstileWidgetId.current!);
-        } catch (error) {
-          setStatusMessage("Something went wrong. Please try again.");
-          setStatusType("error");
-        } finally {
-          setLoading(false);
-        }
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        ...formData,
+        companyWebsite,
+      }),
     });
-  }
 
-  window.turnstile.execute(turnstileWidgetId.current);
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
+
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      comment: "",
+    });
+
+    setCompanyWebsite("");
+    setStatusMessage("Thanks! Your message has been sent.");
+    setStatusType("success");
+  } catch (error) {
+    setStatusMessage("Something went wrong. Please try again.");
+    setStatusType("error");
+  } finally {
+    setLoading(false);
+  }
 };
 
   return (
@@ -270,7 +231,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 autoComplete="off"
               />
 
-             <div id="turnstile-container" className="hidden" />
+          
             <div className="text-center">
                 <button
                 type="submit"
@@ -440,10 +401,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   </div>
 )}
 
-<Script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-  strategy="afterInteractive"
-/>
+
 
     </main>
   );
