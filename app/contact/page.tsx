@@ -8,12 +8,12 @@ import Script from "next/script";
 
 declare global {
   interface Window {
-    onTurnstileSuccess: (token: string) => void;
     turnstile: {
-      render: (
+      execute: (
         container: string,
         options: {
           sitekey: string;
+          action?: string;
           callback: (token: string) => void;
         }
       ) => void;
@@ -33,28 +33,10 @@ export default function ContactUsPage() {
 
 const [turnstileToken, setTurnstileToken] = useState("");
 const [companyWebsite, setCompanyWebsite] = useState("");
-
+const [loading, setLoading] = useState(false);
 const [statusMessage, setStatusMessage] = useState("");
 const [statusType, setStatusType] = useState<"success" | "error" | "">("");
 
-useEffect(() => {
-  window.onTurnstileSuccess = (token: string) => {
-    setTurnstileToken(token);
-  };
-
-  const interval = setInterval(() => {
-    if (window.turnstile) {
-      clearInterval(interval);
-
-      window.turnstile.render("#turnstile-container", {
-        sitekey: "0x4AAAAAADUoEf10wkNnGQuS",
-        callback: window.onTurnstileSuccess,
-      });
-    }
-  }, 500);
-
-  return () => clearInterval(interval);
-}, []);
 
 
 
@@ -67,44 +49,58 @@ const handleChange = (
   });
 };
 
-const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+  setLoading(true);
+  setStatusMessage("");
+  setStatusType("");
 
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-              ...formData,
-              turnstileToken,
-              companyWebsite,
-            }),
-    });
-
-    if (response.ok) {
-            setStatusType("success");
-            setStatusMessage("Message received successfully. We’ll get back to you shortly.");
-
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                comment: "",
-            });
-            setTurnstileToken("");
-            setCompanyWebsite("");
-
-            } else {
-            setStatusType("error");
-            setStatusMessage("Something went wrong. Please try again in a moment.");
-            }
-  } catch (error) {
-    console.error(error);
+  if (!window.turnstile) {
+    setLoading(false);
+    setStatusMessage("Verification failed. Please refresh and try again.");
     setStatusType("error");
-    setStatusMessage("Something went wrong. Please try again in a moment.");
+    return;
   }
+
+  window.turnstile.execute("#turnstile-container", {
+    sitekey: "0x4AAAAAADUoEf10wkNnGQuS",
+    action: "contact_form",
+    callback: async (token: string) => {
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            turnstileToken: token,
+            companyWebsite,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to send message");
+        }
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          comment: "",
+        });
+
+        setCompanyWebsite("");
+        setStatusMessage("Thanks! Your message has been sent.");
+        setStatusType("success");
+      } catch (error) {
+        setStatusMessage("Something went wrong. Please try again.");
+        setStatusType("error");
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
 };
 
 
@@ -265,11 +261,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 autoComplete="off"
               />
 
-              <div
-                  id="turnstile-container"
-                  className="mt-6 flex justify-center"
-                />
-
+             <div id="turnstile-container" className="hidden" />
             <div className="text-center">
                 <button
                 type="submit"
@@ -441,7 +433,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
 <Script
   src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-  strategy="beforeInteractive"
+  strategy="afterInteractive"
 />
 
     </main>
