@@ -3,20 +3,22 @@
 
 import { motion } from "framer-motion";
 import ContactPixelIntro from "../components/ContactPixelIntro";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import Script from "next/script";
 
 declare global {
   interface Window {
     turnstile: {
-      execute: (
+      render: (
         container: string,
         options: {
           sitekey: string;
-          action?: string;
+          size: "invisible";
           callback: (token: string) => void;
         }
-      ) => void;
+      ) => string;
+      execute: (widgetId: string) => void;
+      reset: (widgetId: string) => void;
     };
   }
 }
@@ -31,6 +33,7 @@ export default function ContactUsPage() {
   comment: "",
 });
 
+const turnstileWidgetId = useRef<string | null>(null);
 const [turnstileToken, setTurnstileToken] = useState("");
 const [companyWebsite, setCompanyWebsite] = useState("");
 const [loading, setLoading] = useState(false);
@@ -51,6 +54,7 @@ const handleChange = (
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+
   setLoading(true);
   setStatusMessage("");
   setStatusType("");
@@ -62,47 +66,52 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     return;
   }
 
-  window.turnstile.execute("#turnstile-container", {
-    sitekey: "0x4AAAAAADUoEf10wkNnGQuS",
-    action: "contact_form",
-    callback: async (token: string) => {
-      try {
-        const response = await fetch("/api/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-            turnstileToken: token,
-            companyWebsite,
-          }),
-        });
+  if (!turnstileWidgetId.current) {
+    turnstileWidgetId.current = window.turnstile.render("#turnstile-container", {
+      sitekey: "0x4AAAAAADUoEf10wkNnGQuS",
+      size: "invisible",
+      callback: async (token: string) => {
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...formData,
+              turnstileToken: token,
+              companyWebsite,
+            }),
+          });
 
-        if (!response.ok) {
-          throw new Error("Failed to send message");
+          if (!response.ok) {
+            throw new Error("Failed to send message");
+          }
+
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            comment: "",
+          });
+
+          setCompanyWebsite("");
+          setStatusMessage("Thanks! Your message has been sent.");
+          setStatusType("success");
+
+          window.turnstile.reset(turnstileWidgetId.current!);
+        } catch (error) {
+          setStatusMessage("Something went wrong. Please try again.");
+          setStatusType("error");
+        } finally {
+          setLoading(false);
         }
+      },
+    });
+  }
 
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          comment: "",
-        });
-
-        setCompanyWebsite("");
-        setStatusMessage("Thanks! Your message has been sent.");
-        setStatusType("success");
-      } catch (error) {
-        setStatusMessage("Something went wrong. Please try again.");
-        setStatusType("error");
-      } finally {
-        setLoading(false);
-      }
-    },
-  });
+  window.turnstile.execute(turnstileWidgetId.current);
 };
-
 
   return (
     <main className="min-h-screen bg-white font-[var(--font-assistant)] text-slate-950">
