@@ -52,18 +52,18 @@ export default function HeroPixelIntro() {
       </motion.div>
 
       <motion.div
-  initial={{ opacity: 0, scaleX: 0.2 }}
-  animate={{
-    opacity: [0, 1, 0],
-    scaleX: [0.2, 1.15, 1.35],
-  }}
-  transition={{
-    duration: 3.5,
-    delay: 2.2,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[220px] w-[140%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/55 blur-[90px]"
-/>
+        initial={{ opacity: 0, scaleX: 0.2 }}
+        animate={{
+            opacity: [0, 1, 0],
+            scaleX: [0.2, 1.15, 1.35],
+        }}
+        transition={{
+            duration: 3.5,
+            delay: 2.2,
+            ease: [0.22, 1, 0.36, 1],
+        }}
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[220px] w-[140%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/55 blur-[90px]"
+        />
 
       <motion.h1
             initial={{

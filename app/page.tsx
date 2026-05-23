@@ -3,6 +3,7 @@
 import HeroPixelIntro from "./components/HeroPixelIntro";
 import { motion } from "framer-motion";
 
+
 const services = [
   {
     title: "Fast and responsive websites",
@@ -315,6 +316,11 @@ export default function Home() {
         <p>Terms and Policies</p>
       </div>
     </footer>
+
+
+
+
+
     </main>
   );
 }
