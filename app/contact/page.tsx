@@ -232,12 +232,13 @@ const handleSubmit = async (e: React.FormEvent) => {
                 autoComplete="off"
               />
 
-              <div className="mt-6 flex justify-center">
-                <Turnstile
-                  sitekey="0x4AAAAAADUoEf10wkNnGQuS"
-                  onVerify={(token) => setTurnstileToken(token)}
-                />
-              </div>
+              <div className="mt-6 flex justify-center border border-red-500 p-4">
+                  <p className="text-red-500">Turnstile area test</p>
+                  <Turnstile
+                    sitekey="0x4AAAAAADUoEf10wkNnGQuS"
+                    onVerify={(token) => setTurnstileToken(token)}
+                  />
+                </div>
 
             <div className="text-center">
                 <button
