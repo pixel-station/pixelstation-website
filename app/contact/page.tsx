@@ -1,8 +1,10 @@
 "use client";
 
+
 import { motion } from "framer-motion";
 import ContactPixelIntro from "../components/ContactPixelIntro";
 import { useState } from "react";
+import Turnstile from "react-turnstile";
 
 
 
@@ -15,8 +17,13 @@ export default function ContactUsPage() {
   comment: "",
 });
 
+const [turnstileToken, setTurnstileToken] = useState("");
+const [companyWebsite, setCompanyWebsite] = useState("");
+
 const [statusMessage, setStatusMessage] = useState("");
 const [statusType, setStatusType] = useState<"success" | "error" | "">("");
+
+
 
 const handleChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,7 +43,11 @@ const handleSubmit = async (e: React.FormEvent) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+              ...formData,
+              turnstileToken,
+              companyWebsite,
+            }),
     });
 
     if (response.ok) {
@@ -49,6 +60,9 @@ const handleSubmit = async (e: React.FormEvent) => {
                 phone: "",
                 comment: "",
             });
+            setTurnstileToken("");
+            setCompanyWebsite("");
+
             } else {
             setStatusType("error");
             setStatusMessage("Something went wrong. Please try again in a moment.");
@@ -207,6 +221,23 @@ const handleSubmit = async (e: React.FormEvent) => {
                 required
                 className="mt-5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-5 py-5 text-[15px] text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
             />
+
+            <input
+                type="text"
+                name="companyWebsite"
+                value={companyWebsite}
+                onChange={(e) => setCompanyWebsite(e.target.value)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              <div className="mt-6 flex justify-center">
+                <Turnstile
+                  sitekey="0x4AAAAAADUoEf10wkNnGQuS"
+                  onVerify={(token) => setTurnstileToken(token)}
+                />
+              </div>
 
             <div className="text-center">
                 <button
