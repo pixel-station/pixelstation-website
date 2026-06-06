@@ -12,8 +12,9 @@ export default async function AdminPage() {
 
   const totalOrders = orders.length;
   const totalRevenue = orders.reduce(
-    (sum, order) => sum + (order.amount_total ?? 0),
-    0
+  (sum: number, order) => sum + (order.amount_total ?? 0),
+  0
+);
   );
   const averageOrderValue =
     totalOrders > 0 ? totalRevenue / totalOrders : 0;
