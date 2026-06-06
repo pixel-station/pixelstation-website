@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { products } from "@/lib/products";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   try {
-    const { size, quantity } = await req.json();
+    const { productId, size, quantity } = await req.json();
+
+    const product = products.find((item) => item.id === productId);
+
+            if (!product) {
+            return NextResponse.json(
+                { error: "Product not found" },
+                { status: 404 }
+            );
+            }
 
     const orderQuantity = quantity || 1;
 
@@ -13,14 +23,18 @@ export async function POST(req: Request) {
         mode: "payment",
 
         metadata: {
+            productId: product.id,
+            productName: product.name,
             size,
             quantity: String(orderQuantity),
         },
 
         payment_intent_data: {
                 metadata: {
-                    size,
-                    quantity: String(orderQuantity),
+                     productId: product.id,
+                        productName: product.name,
+                        size,
+                        quantity: String(orderQuantity),
                 },
                 },
 
@@ -31,9 +45,9 @@ export async function POST(req: Request) {
             price_data: {
                 currency: "aud",
                 product_data: {
-                name: `Dragaround T-Shirt - Size ${size}`,
+                name: `${product.name} - Size ${size}`,
                 },
-                unit_amount: 2999,
+                unit_amount: Math.round(product.price * 100),
             },
             quantity: orderQuantity,
             },

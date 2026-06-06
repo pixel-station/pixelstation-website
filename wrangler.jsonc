@@ -19,6 +19,15 @@
   "images": {
     "binding": "IMAGES"
   },
+
+  "d1_databases": [
+   {
+    "binding": "DB",
+    "database_name": "pixel-station-db",
+    "database_id": "7536cccf-2e45-4bd5-ab02-217ece147bdf"
+    }
+  ],  
+
   "observability": {
     "enabled": true
   }
