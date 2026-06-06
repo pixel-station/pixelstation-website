@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { products } from "@/lib/products";
+import { getProducts } from "@/lib/db-products";
 import Image from "next/image";
 
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const products = await getProducts();
   return (
     <main className="min-h-screen bg-white px-6 py-24">
       <div className="mx-auto max-w-4xl">
@@ -13,15 +14,15 @@ export default function ShopPage() {
 
         <div className="grid gap-6">
           {products
-            .filter((product) => product.active)
+            .filter((product) => product.status === "active")
             .map((product) => (
                       <Link
               key={product.id}
-              href={`/shop/${product.id}`}
+              href={`/shop/${product.slug}`}
               className="rounded-2xl border p-6 hover:shadow-lg"
             >
               <Image
-                  src={product.image}
+                  src={product.image_url || ""}
                   alt={product.name}
                   width={400}
                   height={400}

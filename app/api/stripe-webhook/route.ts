@@ -170,6 +170,8 @@ export async function POST(req: Request) {
 
       console.log("Business email result:", emailResult);
 
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       if (customerEmail !== "Not provided") {
   const customerEmailResult = await resend.emails.send({
     from: "Pixel Station <noreply@pixelstation.com.au>",
