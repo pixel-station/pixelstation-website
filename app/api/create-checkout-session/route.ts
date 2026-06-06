@@ -57,28 +57,92 @@ export async function POST(req: Request) {
         allowed_countries: ["AU"],
       },
 
-      shipping_options: [
-            {
-                shipping_rate_data: {
-                type: "fixed_amount",
-                fixed_amount: {
-                    amount: 1295,
-                    currency: "aud",
-                },
-                display_name: "Standard Shipping",
-                delivery_estimate: {
-                    minimum: {
-                    unit: "business_day",
-                    value: 2,
+      shipping_options:
+            product.price * orderQuantity >= 100
+                ? [
+                    {
+                    shipping_rate_data: {
+                        type: "fixed_amount",
+                        fixed_amount: {
+                        amount: 0,
+                        currency: "aud",
+                        },
+                        display_name: "Free Standard Shipping",
+                        delivery_estimate: {
+                        minimum: {
+                            unit: "business_day",
+                            value: 2,
+                        },
+                        maximum: {
+                            unit: "business_day",
+                            value: 5,
+                        },
+                        },
                     },
-                    maximum: {
-                    unit: "business_day",
-                    value: 5,
                     },
-                },
-                },
-            },
-            ],
+                    {
+                    shipping_rate_data: {
+                        type: "fixed_amount",
+                        fixed_amount: {
+                        amount: 1995,
+                        currency: "aud",
+                        },
+                        display_name: "Express Shipping",
+                        delivery_estimate: {
+                        minimum: {
+                            unit: "business_day",
+                            value: 1,
+                        },
+                        maximum: {
+                            unit: "business_day",
+                            value: 2,
+                        },
+                        },
+                    },
+                    },
+                ]
+                : [
+                    {
+                    shipping_rate_data: {
+                        type: "fixed_amount",
+                        fixed_amount: {
+                        amount: 1295,
+                        currency: "aud",
+                        },
+                        display_name: "Standard Shipping",
+                        delivery_estimate: {
+                        minimum: {
+                            unit: "business_day",
+                            value: 2,
+                        },
+                        maximum: {
+                            unit: "business_day",
+                            value: 5,
+                        },
+                        },
+                    },
+                    },
+                    {
+                    shipping_rate_data: {
+                        type: "fixed_amount",
+                        fixed_amount: {
+                        amount: 1995,
+                        currency: "aud",
+                        },
+                        display_name: "Express Shipping",
+                        delivery_estimate: {
+                        minimum: {
+                            unit: "business_day",
+                            value: 1,
+                        },
+                        maximum: {
+                            unit: "business_day",
+                            value: 2,
+                        },
+                        },
+                    },
+                    },
+                ],
 
       phone_number_collection: {
         enabled: true,
