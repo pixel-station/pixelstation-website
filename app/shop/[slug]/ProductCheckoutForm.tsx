@@ -3,13 +3,13 @@
 import { useState } from "react";
 
 type ProductCheckoutFormProps = {
-  productId: string;
+  slug: string;
   productName: string;
   price: number;
 };
 
 export default function ProductCheckoutForm({
-  productId,
+  slug,
   productName,
   price,
 }: ProductCheckoutFormProps) {
@@ -28,7 +28,7 @@ export default function ProductCheckoutForm({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        productId,
+        slug,
         size,
         quantity,
       }),

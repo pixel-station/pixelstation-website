@@ -6,11 +6,11 @@ import { getProductBySlug } from "@/lib/db-products";
 export default async function ShopPage({
   params,
 }: {
-  params: Promise<{ productId: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { productId } = await params;
+  const { slug } = await params;
 
-  const product = await getProductBySlug(productId);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -38,7 +38,7 @@ export default async function ShopPage({
         <p className="mt-4 text-xl text-slate-600">{product.description}</p>
 
         <ProductCheckoutForm
-          productId={product.slug}
+          slug={product.slug}
           productName={product.name}
           price={product.price}
         />

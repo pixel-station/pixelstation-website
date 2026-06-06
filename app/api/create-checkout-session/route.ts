@@ -6,9 +6,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   try {
-    const { productId, size, quantity } = await req.json();
+    const { slug, size, quantity } = await req.json();
 
-    const product = await getProductBySlug(productId);
+    const product = await getProductBySlug(slug);
 
     if (!product) {
       return NextResponse.json(
@@ -56,6 +56,29 @@ export async function POST(req: Request) {
       shipping_address_collection: {
         allowed_countries: ["AU"],
       },
+
+      shipping_options: [
+            {
+                shipping_rate_data: {
+                type: "fixed_amount",
+                fixed_amount: {
+                    amount: 1295,
+                    currency: "aud",
+                },
+                display_name: "Standard Shipping",
+                delivery_estimate: {
+                    minimum: {
+                    unit: "business_day",
+                    value: 2,
+                    },
+                    maximum: {
+                    unit: "business_day",
+                    value: 5,
+                    },
+                },
+                },
+            },
+            ],
 
       phone_number_collection: {
         enabled: true,
