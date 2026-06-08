@@ -1,14 +1,28 @@
 import { NextResponse } from "next/server";
+import { getProductBySlug } from "@/lib/db-products";
 
 export async function POST(req: Request) {
-  const { slug, size, quantity } = await req.json();
+  try {
+    const { slug, size, quantity } = await req.json();
 
-  return NextResponse.json({
-    success: true,
-    received: {
-      slug,
-      size,
-      quantity,
-    },
-  });
+    const product = await getProductBySlug(slug);
+
+    return NextResponse.json({
+      success: true,
+      received: {
+        slug,
+        size,
+        quantity,
+      },
+      product,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : String(error),
+      },
+      { status: 500 }
+    );
+  }
 }
