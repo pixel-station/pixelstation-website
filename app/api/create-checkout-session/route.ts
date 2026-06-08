@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getProductBySlug } from "@/lib/db-products";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   try {
     const { slug, size, quantity } = await req.json();
+
+    await getCloudflareContext({ async: true });
 
     const product = await getProductBySlug(slug);
 
@@ -18,6 +21,71 @@ export async function POST(req: Request) {
     }
 
     const orderQuantity = quantity || 1;
+    const productTotal = product.price * orderQuantity;
+
+    const expressShipping = {
+      shipping_rate_data: {
+        type: "fixed_amount" as const,
+        fixed_amount: {
+          amount: 1995,
+          currency: "aud",
+        },
+        display_name: "Express Shipping",
+        delivery_estimate: {
+          minimum: {
+            unit: "business_day" as const,
+            value: 1,
+          },
+          maximum: {
+            unit: "business_day" as const,
+            value: 2,
+          },
+        },
+      },
+    };
+
+    const standardShipping =
+      productTotal >= 100
+        ? {
+            shipping_rate_data: {
+              type: "fixed_amount" as const,
+              fixed_amount: {
+                amount: 0,
+                currency: "aud",
+              },
+              display_name: "Free Standard Shipping",
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day" as const,
+                  value: 2,
+                },
+                maximum: {
+                  unit: "business_day" as const,
+                  value: 5,
+                },
+              },
+            },
+          }
+        : {
+            shipping_rate_data: {
+              type: "fixed_amount" as const,
+              fixed_amount: {
+                amount: 1295,
+                currency: "aud",
+              },
+              display_name: "Standard Shipping",
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day" as const,
+                  value: 2,
+                },
+                maximum: {
+                  unit: "business_day" as const,
+                  value: 5,
+                },
+              },
+            },
+          };
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -57,92 +125,7 @@ export async function POST(req: Request) {
         allowed_countries: ["AU"],
       },
 
-      shipping_options:
-            product.price * orderQuantity >= 100
-                ? [
-                    {
-                    shipping_rate_data: {
-                        type: "fixed_amount",
-                        fixed_amount: {
-                        amount: 0,
-                        currency: "aud",
-                        },
-                        display_name: "Free Standard Shipping",
-                        delivery_estimate: {
-                        minimum: {
-                            unit: "business_day",
-                            value: 2,
-                        },
-                        maximum: {
-                            unit: "business_day",
-                            value: 5,
-                        },
-                        },
-                    },
-                    },
-                    {
-                    shipping_rate_data: {
-                        type: "fixed_amount",
-                        fixed_amount: {
-                        amount: 1995,
-                        currency: "aud",
-                        },
-                        display_name: "Express Shipping",
-                        delivery_estimate: {
-                        minimum: {
-                            unit: "business_day",
-                            value: 1,
-                        },
-                        maximum: {
-                            unit: "business_day",
-                            value: 2,
-                        },
-                        },
-                    },
-                    },
-                ]
-                : [
-                    {
-                    shipping_rate_data: {
-                        type: "fixed_amount",
-                        fixed_amount: {
-                        amount: 1295,
-                        currency: "aud",
-                        },
-                        display_name: "Standard Shipping",
-                        delivery_estimate: {
-                        minimum: {
-                            unit: "business_day",
-                            value: 2,
-                        },
-                        maximum: {
-                            unit: "business_day",
-                            value: 5,
-                        },
-                        },
-                    },
-                    },
-                    {
-                    shipping_rate_data: {
-                        type: "fixed_amount",
-                        fixed_amount: {
-                        amount: 1995,
-                        currency: "aud",
-                        },
-                        display_name: "Express Shipping",
-                        delivery_estimate: {
-                        minimum: {
-                            unit: "business_day",
-                            value: 1,
-                        },
-                        maximum: {
-                            unit: "business_day",
-                            value: 2,
-                        },
-                        },
-                    },
-                    },
-                ],
+      shipping_options: [standardShipping, expressShipping],
 
       phone_number_collection: {
         enabled: true,
