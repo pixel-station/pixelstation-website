@@ -11,7 +11,7 @@ export type Product = {
 };
 
 export async function getProducts() {
-  const { env } = await getCloudflareContext();
+  const { env } = await getCloudflareContext({ async: true });
   const db = (env as any).DB;
 
   const result = await db

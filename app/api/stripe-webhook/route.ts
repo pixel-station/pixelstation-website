@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   if (event.type === "checkout.session.completed") {
     try {
       const session = event.data.object as Stripe.Checkout.Session;
-      const { env } = await getCloudflareContext();
+      const { env } = await getCloudflareContext({ async: true });
       const db = (env as any).DB;
 
       const orderNumber = `DRG-${session.id.slice(-8).toUpperCase()}`;
