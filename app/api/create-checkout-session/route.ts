@@ -3,17 +3,12 @@ import { getProductBySlug } from "@/lib/db-products";
 
 export async function POST(req: Request) {
   try {
-    const { slug, size, quantity } = await req.json();
+    const { slug } = await req.json();
 
     const product = await getProductBySlug(slug);
 
     return NextResponse.json({
       success: true,
-      received: {
-        slug,
-        size,
-        quantity,
-      },
       product,
     });
   } catch (error) {
