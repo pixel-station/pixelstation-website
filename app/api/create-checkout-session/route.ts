@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST() {
   try {
-    const customers = await stripe.customers.list({
-      limit: 1,
+    const response = await fetch("https://api.stripe.com/v1/customers?limit=1", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+      },
     });
 
+    const data = await response.json();
+
     return NextResponse.json({
-      success: true,
-      stripeConnected: true,
-      customerCount: customers.data.length,
+      success: response.ok,
+      status: response.status,
+      data,
     });
   } catch (error) {
     return NextResponse.json(
