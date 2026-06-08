@@ -12,32 +12,37 @@ export type Product = {
 
 export async function getProducts() {
   const { env } = await getCloudflareContext();
+  const db = (env as any).DB;
 
-  const result = await env.DB.prepare(
-    `
-      SELECT *
-      FROM products
-      ORDER BY created_at DESC
-    `
-  ).all<Product>();
+  const result = await db
+    .prepare(
+      `
+        SELECT *
+        FROM products
+        ORDER BY created_at DESC
+      `
+    )
+    .all();
 
-  return result.results;
+  return result.results as Product[];
 }
 
 export async function getProductBySlug(slug: string) {
   const { env } = await getCloudflareContext();
+  const db = (env as any).DB;
 
-  const result = await env.DB.prepare(
-    `
-      SELECT *
-      FROM products
-      WHERE slug = ?
-      AND status = 'active'
-      LIMIT 1
-    `
-  )
+  const result = await db
+    .prepare(
+      `
+        SELECT *
+        FROM products
+        WHERE slug = ?
+        AND status = 'active'
+        LIMIT 1
+      `
+    )
     .bind(slug)
-    .first<Product>();
+    .first();
 
-  return result;
+  return result as Product | null;
 }

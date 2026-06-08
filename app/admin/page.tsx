@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
-import { getOrders } from "@/lib/orders";
+import { getOrders, type Order } from "@/lib/orders";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   const orders = await getOrders();
@@ -11,11 +13,11 @@ export default async function AdminPage() {
   const inactiveProducts = products.filter((product) => !product.active).length;
 
   const totalOrders = orders.length;
-  const totalRevenue = orders.reduce(
-  (sum: number, order) => sum + (order.amount_total ?? 0),
+
+const totalRevenue = orders.reduce(
+  (sum: number, order: Order) => sum + (order.amount_total ?? 0),
   0
 );
-  );
   const averageOrderValue =
     totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
@@ -140,7 +142,7 @@ export default async function AdminPage() {
               </thead>
 
               <tbody>
-                {orders.map((order) => (
+                {orders.map((order: Order) => (
                   <tr key={order.id} className="border-t border-slate-200">
                     <td className="font-semibold text-blue-600">
                       {order.order_number}

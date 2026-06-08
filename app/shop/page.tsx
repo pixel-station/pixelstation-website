@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { getProducts } from "@/lib/db-products";
+import { getProducts, type Product } from "@/lib/db-products";
 import Image from "next/image";
+
+export const dynamic = "force-dynamic";
 
 
 export default async function ShopPage() {
@@ -14,8 +16,8 @@ export default async function ShopPage() {
 
         <div className="grid gap-6">
           {products
-            .filter((product) => product.status === "active")
-            .map((product) => (
+            .filter((product: Product) => product.status === "active")
+              .map((product: Product) => (
                       <Link
               key={product.id}
               href={`/shop/${product.slug}`}

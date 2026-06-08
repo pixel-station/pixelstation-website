@@ -37,12 +37,12 @@ export async function POST(req: Request) {
     try {
       const session = event.data.object as Stripe.Checkout.Session;
       const { env } = await getCloudflareContext();
+      const db = (env as any).DB;
 
       const orderNumber = `DRG-${session.id.slice(-8).toUpperCase()}`;
 
-      const existingOrder = await env.DB.prepare(
-        "SELECT id FROM orders WHERE stripe_session_id = ?"
-      )
+      const existingOrder = await db
+        .prepare("SELECT id FROM orders WHERE stripe_session_id = ?")
         .bind(session.id)
         .first();
 
@@ -91,25 +91,26 @@ export async function POST(req: Request) {
         amount,
       });
 
-      await env.DB.prepare(`
-        INSERT OR IGNORE INTO orders (
-          order_number,
-          stripe_session_id,
-          stripe_payment_intent_id,
-          customer_name,
-          customer_email,
-          customer_phone,
-          shipping_address,
-          product_id,
-          product_name,
-          size,
-          quantity,
-          amount_total,
-          currency,
-          status
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `)
+      await db
+        .prepare(`
+          INSERT OR IGNORE INTO orders (
+            order_number,
+            stripe_session_id,
+            stripe_payment_intent_id,
+            customer_name,
+            customer_email,
+            customer_phone,
+            shipping_address,
+            product_id,
+            product_name,
+            size,
+            quantity,
+            amount_total,
+            currency,
+            status
+          )
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `)
         .bind(
           orderNumber,
           session.id,
@@ -139,30 +140,15 @@ export async function POST(req: Request) {
             ? customerEmail
             : "create@pixelstation.com.au",
         html: `
-        <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-          Order ${orderNumber} • ${quantity}x ${productName} • ${amount}
-        </div>
           <h2>🚨 New Dragaround Order Received</h2>
-
           <p><strong>Order Number:</strong> ${orderNumber}</p>
-
-          <p>
-            <strong>Customer:</strong> ${customerName}<br />
-            <strong>Quantity:</strong> ${quantity}<br />
-            <strong>Total:</strong> ${amount}
-          </p>
-
-          <h3>Order Details</h3>
+          <p><strong>Customer:</strong> ${customerName}</p>
+          <p><strong>Email:</strong> ${customerEmail}</p>
+          <p><strong>Phone:</strong> ${customerPhone}</p>
           <p><strong>Product:</strong> ${productName}</p>
           <p><strong>Size:</strong> ${size}</p>
           <p><strong>Quantity:</strong> ${quantity}</p>
           <p><strong>Total Paid:</strong> ${amount}</p>
-
-          <h3>Customer Details</h3>
-          <p><strong>Name:</strong> ${customerName}</p>
-          <p><strong>Email:</strong> ${customerEmail}</p>
-          <p><strong>Phone:</strong> ${customerPhone}</p>
-
           <h3>Shipping Address</h3>
           <p>${shippingAddress}</p>
         `,
@@ -173,54 +159,30 @@ export async function POST(req: Request) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (customerEmail !== "Not provided") {
-  const customerEmailResult = await resend.emails.send({
-    from: "Pixel Station <noreply@pixelstation.com.au>",
-    to: customerEmail,
-    subject: "Your Dragaround order has been received",
-    html: `
-      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-        Order ${orderNumber} • ${quantity}x ${productName} • ${amount}
-      </div>
+        const customerEmailResult = await resend.emails.send({
+          from: "Pixel Station <noreply@pixelstation.com.au>",
+          to: customerEmail,
+          subject: "Your Dragaround order has been received",
+          html: `
+            <h1>Thank you for your order!</h1>
+            <p><strong>Order Number:</strong> ${orderNumber}</p>
+            <p>Hi ${customerName},</p>
+            <p>We've successfully received your order and will begin preparing it shortly.</p>
+            <p><strong>Estimated Dispatch:</strong> 2-3 business days</p>
+            <h2>Order Summary</h2>
+            <p><strong>Product:</strong> ${productName}</p>
+            <p><strong>Size:</strong> ${size}</p>
+            <p><strong>Quantity:</strong> ${quantity}</p>
+            <p><strong>Total Paid:</strong> ${amount}</p>
+            <h2>Shipping Address</h2>
+            <p>${shippingAddress}</p>
+            <p>Questions? Contact us at <a href="mailto:create@pixelstation.com.au">create@pixelstation.com.au</a></p>
+            <p>Thank you for supporting Dragaround!</p>
+          `,
+        });
 
-      <h1>Thank you for your order!</h1>
-      <p style="font-size:16px;"><strong>Order Number:</strong> ${orderNumber}</p>
-
-      <p>Hi ${customerName},</p>
-
-      <p>We've successfully received your order and will begin preparing it shortly.</p>
-      <p><strong>Estimated Dispatch:</strong> 2-3 business days</p>
-
-      <h2>Order Summary</h2>
-
-      <p><strong>Product:</strong> ${productName}</p>
-      <p><strong>Size:</strong> ${size}</p>
-      <p><strong>Quantity:</strong> ${quantity}</p>
-      <p><strong>Total Paid:</strong> ${amount}</p>
-
-      <h2>Shipping Address</h2>
-
-      <p>${shippingAddress}</p>
-
-      <br />
-
-      <p><strong>Questions?</strong></p>
-
-      <p>
-        Contact us at
-        <a href="mailto:create@pixelstation.com.au">
-          create@pixelstation.com.au
-        </a>
-      </p>
-
-      <p>Thank you for supporting Dragaround!</p>
-    `,
-  });
-
-  console.log("Customer email result:", customerEmailResult);
-}
-      
-
-      
+        console.log("Customer email result:", customerEmailResult);
+      }
 
       if (emailResult.error) {
         console.error(

@@ -16,10 +16,11 @@ export type Order = {
 
 export async function getOrders() {
   const { env } = await getCloudflareContext();
+  const db = (env as any).DB;
 
-  const result = await env.DB.prepare(
-    "SELECT * FROM orders ORDER BY created_at DESC"
-  ).all<Order>();
+  const result = await db
+    .prepare("SELECT * FROM orders ORDER BY created_at DESC")
+    .all();
 
-  return result.results;
+  return result.results as Order[];
 }

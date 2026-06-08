@@ -28,6 +28,11 @@
     }
   ],  
 
+  "vars": {
+  "BUSINESS_ORDER_EMAIL": "create@pixelstation.com.au",
+  "NEXT_PUBLIC_SITE_URL": "https://pixelstation-website.create-125.workers.dev"
+},
+
   "observability": {
     "enabled": true
   }
