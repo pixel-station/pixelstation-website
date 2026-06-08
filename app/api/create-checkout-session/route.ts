@@ -1,20 +1,17 @@
 import { NextResponse } from "next/server";
-import { getProductBySlug } from "@/lib/db-products";
+import Stripe from "stripe";
 
-export async function POST(req: Request) {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+export async function POST() {
   try {
-    const { slug } = await req.json();
-
-    const product = await getProductBySlug(slug);
-
     return NextResponse.json({
-      success: true,
-      product,
+      stripeKeyExists: !!process.env.STRIPE_SECRET_KEY,
+      keyPrefix: process.env.STRIPE_SECRET_KEY?.substring(0, 7),
     });
   } catch (error) {
     return NextResponse.json(
       {
-        success: false,
         error: error instanceof Error ? error.message : String(error),
       },
       { status: 500 }
